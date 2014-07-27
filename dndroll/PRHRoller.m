@@ -64,6 +64,7 @@
 - (void) processAndEmptyTerms:(NSMutableArray *)allTerms {
 	NSArray *rawResults = [self rollDiceSpecifiedByTerms:allTerms];
 	NSArray *summedResults = [self sumRollsInRollResults:rawResults];
+	bool leadingPlus = false;
 	bool shouldPrintPlusSeparator = false;
 	for (NSUInteger i = 0, count = summedResults.count; i < count; ++i) {
 		id diceOrNumber = allTerms[i];
@@ -84,6 +85,7 @@
 			shouldPrintPlusSeparator = true;
 		} else if (i == 0 && [diceOrNumber isEqual:@0]) {
 			//+ prefix (when the descriptor started with +)
+			leadingPlus = true;
 			printf("%s", "+");
 			shouldPrintPlusSeparator = false;
 		} else {
@@ -93,7 +95,7 @@
 			shouldPrintPlusSeparator = true;
 		}
 	}
-	printf("=%s\n", [[summedResults valueForKeyPath:@"@sum.integerValue"] description].UTF8String);
+	printf("=%s%s\n", leadingPlus ? "+" : "", [[summedResults valueForKeyPath:@"@sum.integerValue"] description].UTF8String);
 
 	[allTerms removeAllObjects];
 }
