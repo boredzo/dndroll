@@ -6,8 +6,11 @@
 //  Copyright (c) 2014 Peter Hosey. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@interface PRHDice: NSObject
 
-@interface PRHDice : NSObject
++ (instancetype) newWithDescription:(NSString *)desc;
+- (instancetype) initWithDescription:(NSString *)desc;
+
+- (NSArray *) roll;
 
 @end

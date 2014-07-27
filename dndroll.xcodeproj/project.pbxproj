@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3178A9831984CDDB00A41F24 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3178A9821984CDDB00A41F24 /* Foundation.framework */; };
 		3178A9861984CDDB00A41F24 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3178A9851984CDDB00A41F24 /* main.m */; };
+		3178A9951984D11F00A41F24 /* PRHRoller.m in Sources */ = {isa = PBXBuildFile; fileRef = 3178A9941984D11F00A41F24 /* PRHRoller.m */; };
+		3178A9981984D15B00A41F24 /* PRHDice.m in Sources */ = {isa = PBXBuildFile; fileRef = 3178A9971984D15B00A41F24 /* PRHDice.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +30,10 @@
 		3178A9821984CDDB00A41F24 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3178A9851984CDDB00A41F24 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3178A9881984CDDB00A41F24 /* dndroll-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "dndroll-Prefix.pch"; sourceTree = "<group>"; };
+		3178A9931984D11F00A41F24 /* PRHRoller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRHRoller.h; sourceTree = "<group>"; };
+		3178A9941984D11F00A41F24 /* PRHRoller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRHRoller.m; sourceTree = "<group>"; };
+		3178A9961984D15B00A41F24 /* PRHDice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRHDice.h; sourceTree = "<group>"; };
+		3178A9971984D15B00A41F24 /* PRHDice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRHDice.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +77,10 @@
 			isa = PBXGroup;
 			children = (
 				3178A9851984CDDB00A41F24 /* main.m */,
+				3178A9931984D11F00A41F24 /* PRHRoller.h */,
+				3178A9941984D11F00A41F24 /* PRHRoller.m */,
+				3178A9961984D15B00A41F24 /* PRHDice.h */,
+				3178A9971984D15B00A41F24 /* PRHDice.m */,
 				3178A9871984CDDB00A41F24 /* Supporting Files */,
 			);
 			path = dndroll;
@@ -135,6 +145,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3178A9951984D11F00A41F24 /* PRHRoller.m in Sources */,
+				3178A9981984D15B00A41F24 /* PRHDice.m in Sources */,
 				3178A9861984CDDB00A41F24 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
