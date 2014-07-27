@@ -1,0 +1,7 @@
+#include <stdbool.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+#ifdef __OBJC__
+#	import <Foundation/Foundation.h>
+#endif
