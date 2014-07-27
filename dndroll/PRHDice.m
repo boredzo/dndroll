@@ -11,6 +11,7 @@
 @implementation PRHDice
 {
 	NSInteger _numSides, _numDice;
+	bool _omitLowestDie;
 }
 
 + (instancetype) newWithDescription:(NSString *)desc {
@@ -30,6 +31,9 @@
 
 		if ( ! (gotCount && gotD && gotSides) ) {
 			self = nil;
+		} else {
+			_omitLowestDie = [scanner scanString:@"-lowest" intoString:NULL];
+			//Optional—don't need to check whether we found it.
 		}
 	}
 	return self;
@@ -37,14 +41,28 @@
 
 - (NSArray *) roll {
 	NSMutableArray *results = [NSMutableArray arrayWithCapacity:_numDice];
+
 	for (NSInteger i = 0; i < _numDice; ++i) {
 		[results addObject:@(arc4random_uniform((uint32_t)_numSides) + 1)];
 	}
+
+	if (_omitLowestDie) {
+		NSNumber *lowestDie = [results valueForKeyPath:@"@min.integerValue"];
+
+		//Remove exactly one. removeObject: will remove ALL matches.
+		NSUInteger idx = [results indexOfObject:lowestDie];
+		[results removeObjectAtIndex:idx];
+	}
+
 	return [results copy];
 }
 
 - (NSString *) description {
-	return [NSString stringWithFormat:@"%tdd%td", _numDice, _numSides];
+	return [NSString stringWithFormat:@"%tdd%td%@",
+		_numDice,
+		_numSides,
+		_omitLowestDie ? @"-lowest" : @""
+	];
 }
 
 @end
