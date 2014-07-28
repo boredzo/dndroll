@@ -43,6 +43,15 @@
 					&& (_omitHighestDie = tempHighest)
 				)
 			);
+
+			if ((_numDice > 0) && (_numDice <= (_omitLowestDie + _omitHighestDie))) {
+				NSLog(@"Can't roll %tu dice (%tud%tu) and then exclude %u of them",
+					_numDice,
+					_numDice, _numSides,
+					(unsigned int)(_omitLowestDie + _omitHighestDie)
+				);
+				self = nil;
+			}
 		}
 	}
 	return self;
