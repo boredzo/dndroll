@@ -11,7 +11,7 @@
 @implementation PRHDice
 {
 	NSInteger _numSides, _numDice;
-	bool _omitLowestDie;
+	bool _omitLowestDie, _omitHighestDie;
 }
 
 + (instancetype) newWithDescription:(NSString *)desc {
@@ -32,8 +32,17 @@
 		if ( ! (gotCount && gotD && gotSides) ) {
 			self = nil;
 		} else {
-			_omitLowestDie = [scanner scanString:@"-lowest" intoString:NULL];
-			//Optional—don't need to check whether we found it.
+			//Read -lowest and -highest in either order.
+			bool tempLowest, tempHighest;
+			while (
+				(
+					(tempLowest = [scanner scanString:@"-lowest" intoString:NULL])
+					&& (_omitLowestDie = tempLowest)
+				) || (
+					(tempHighest = [scanner scanString:@"-highest" intoString:NULL])
+					&& (_omitHighestDie = tempHighest)
+				)
+			);
 		}
 	}
 	return self;
@@ -53,15 +62,23 @@
 		NSUInteger idx = [results indexOfObject:lowestDie];
 		[results removeObjectAtIndex:idx];
 	}
+	if (_omitHighestDie) {
+		NSNumber *highestDie = [results valueForKeyPath:@"@max.integerValue"];
+
+		//Remove exactly one. removeObject: will remove ALL matches.
+		NSUInteger idx = [results indexOfObject:highestDie];
+		[results removeObjectAtIndex:idx];
+	}
 
 	return [results copy];
 }
 
 - (NSString *) description {
-	return [NSString stringWithFormat:@"%tdd%td%@",
+	return [NSString stringWithFormat:@"%tdd%td%@%@",
 		_numDice,
 		_numSides,
-		_omitLowestDie ? @"-lowest" : @""
+		_omitLowestDie ? @"-lowest" : @"",
+		_omitHighestDie ? @"-highest" : @""
 	];
 }
 
